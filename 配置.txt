@@ -1,0 +1,24 @@
+配置文件
+/conf/*        $app == 'test'/'final'
+正式：final    public.conf.php
+
+测试：test     test.conf.php
+
+1212121212
+
+入口文件
+/admin/index.php
+
+加载配置
+
+
+
+项目目录
+/app/
+
+
+
+电脑项目目录
+D:\GongHui2018
+
+

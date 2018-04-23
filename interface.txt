@@ -1,0 +1,181 @@
+测试服：
+服务器地址：192.168.1.111
+服务器端口： 8890
+
+
+正式服
+服务器地址：houtaiapi.mmpkk.com
+服务器端口： 8890
+
+
+所有请求类型都是 post
+
+-- 获取伪密钥
+/secret_t
+入参：无
+返回示例：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": "?*2M(7q!3"
+}
+
+真正密钥算法：
+以字符串最后一个数字为字符串的索引，得到基字符串，用这个基字符切割字符串（得到两组字符串）。
+将两组字符串进行左右交换，中间以(基字符+1)连接
+
+python代码示例：
+def make_secret():
+    secret_t = "?*2M(7q!3"
+    p = secret_t[int(secret_t[-1])] #基字符
+    l = secret_t.split(p)
+    return l[1] + chr(ord(p)+1) + l[0]
+
+说明：
+所有入参必须用真密钥签名，然后发送数据
+json_data + "vc" + vc
+
+
+-- 获取用户信息
+/query/getuserinfos
+入参示例：{"memberid":10520}
+返回示例1（查的游客用户）：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": "{\"gameid\": 0, \"name\": \"yk10500\", \"signup_device\": \"this-is-windows-id-1\", \"memberid\": 10500, \"regtime\": \"2018-01-16 19:16:03\", \"sex\": 1, \"signup_ip\": \"192.168.1.111\", \"login_ip\": \"192.168.1.111\", \"login_time\": \"2018-02-01 13:15:50\", \"login_plat\": \"windows\", \"signup_plat\": \"windows\", \"roomcards\": 7}"
+}
+返回示例2（查的微信用户）：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": "{\"openid\": \"o8ejYwj55m6PGOpYugr6LKPXXUQg\", \"gameid\": 0, \"name\": \"\\u5582\", \"signup_device\": \"83138001-D25E-4103-BEBA-806983129086\", \"unionid\": \"oTmMq1oKXr0T_aJzQsKUkks1aG48\", \"memberid\": 10505, \"regtime\": \"2018-01-23 12:24:28\", \"sex\": 1, \"signup_ip\": \"192.168.1.137\", \"login_ip\": \"192.168.1.137\", \"login_time\": \"2018-01-23 12:35:46\", \"login_plat\": \"ios\", \"signup_plat\": \"ios\", \"headurl\": \"http://wx.qlogo.cn/mmopen/vi_32/ewerYPQCiccAsUlfQZwC11HtBzq7FCaqQNF8bIBsxjLGQjoDbt6FIkUibhiamvEh4DJiavVOoQlMj9IZEeX2o85byA/132\", \"roomcards\": 9}"
+}
+
+
+-- 获取用户某个时间段的对局记录
+/query/getbattlerecord
+入参示例：{"memberid":10506,"begin":"2018-02-03","end":"2018-02-04"}
+返回示例(返回的是2月3号全天的战斗记录，不包括end时间，即4号的数据)：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": "[{\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":\"892136\",\"roomopt\":{\"needRoomCard\":1,\"uid\":10506,\"firstMust403\":0,\"forcePut\":1,\"firstPutType\":0,\"showCardsNum\":1,\"createForOther\":0,\"playerNum\":3,\"tableType\":\"PDK_15\",\"roundNum\":10},\"records\":[{\"loser\":{\"10500\":{\"score\":18,\"handPais\":[408,109],\"boom\":[{\"paiType\":\"boom\",\"paiLevel\":1,\"paiData\":[112,212,312,412],\"paiNum\":4,\"value\":12,\"suitValue\":0,\"maskValue\":null}]},\"10501\":{\"score\":-14,\"handPais\":[409,413,209,309],\"boom\":[]}},\"winner\":{\"10506\":{\"score\":-4,\"boom\":[]}},\"curRound\":1}]}\", \"create_date\": \"2018-02-03 20:38:03\", \"game\": \"game_paodekuai\", \"room_id\": 892136, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:05:14\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:06:48\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:09:03\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:09:37\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}]"
+}
+
+-- 获取用户今天的对局记录
+/query/getbattlerecord_today
+入参示例：{"memberid":10506}
+返回示例：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": "[{\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],
+  \"game\":\"game_paodekuai\",\"roomid\":\"892136\",\"roomopt\":{\"needRoomCard\":1,\"uid\":10506,
+  \"firstMust403\":0,\"forcePut\":1,\"firstPutType\":0,\"showCardsNum\":1,\"createForOther\":0,\"playerNum\":3,
+  \"tableType\":\"PDK_15\",\"roundNum\":10},\"records\":[{\"loser\":{\"10500\":{\"score\":18,\"handPais\":[408,109],
+  \"boom\":[{\"paiType\":\"boom\",\"paiLevel\":1,\"paiData\":[112,212,312,412],\"paiNum\":4,\"value\":12,
+  \"suitValue\":0,\"maskValue\":null}]},\"10501\":{\"score\":-14,\"handPais\":[409,413,209,309],\"boom\":[]}},\"winner\":{\"10506\":{\"score\":-4,\"boom\":[]}},\"curRound\":1}]}\", \"create_date\": \"2018-02-03 20:38:03\", \"game\": \"game_paodekuai\", \"room_id\": 892136, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:05:14\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:06:48\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:09:03\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:09:37\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}]"
+}
+
+-- 获取用户昨天的对战记录
+/query/getbattlerecord_yesterday
+入参示例：{"memberid":10506}
+返回示例：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": "[{\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],
+  \"game\":\"game_paodekuai\",\"roomid\":\"892136\",\"roomopt\":{\"needRoomCard\":1,\"uid\":10506,
+  \"firstMust403\":0,\"forcePut\":1,\"firstPutType\":0,\"showCardsNum\":1,\"createForOther\":0,\"playerNum\":3,
+  \"tableType\":\"PDK_15\",\"roundNum\":10},\"records\":[{\"loser\":{\"10500\":{\"score\":18,\"handPais\":[408,109],
+  \"boom\":[{\"paiType\":\"boom\",\"paiLevel\":1,\"paiData\":[112,212,312,412],\"paiNum\":4,\"value\":12,
+  \"suitValue\":0,\"maskValue\":null}]},\"10501\":{\"score\":-14,\"handPais\":[409,413,209,309],\"boom\":[]}},\"winner\":{\"10506\":{\"score\":-4,\"boom\":[]}},\"curRound\":1}]}\", \"create_date\": \"2018-02-03 20:38:03\", \"game\": \"game_paodekuai\", \"room_id\": 892136, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:05:14\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:06:48\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:09:03\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}, {\"info\": \"{\"homeowner\":\"10506\",\"members\":[\"10506\",\"10501\",\"10500\"],\"game\":\"game_paodekuai\",\"roomid\":582169,\"roomopt\":{\"roundNum\":10,\"tableType\":\"PDK_15\",\"playerNum\":3,\"createForOther\":0,\"showCardsNum\":1,\"firstPutType\":0,\"forcePut\":1,\"firstMust403\":0,\"uid\":10506,\"needRoomCard\":1},\"records\":[{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":1},{\"loser\":{\"10501\":{\"score\":0,\"handPais\":[106],\"boom\":[]},\"10506\":{\"score\":0,\"handPais\":[309],\"boom\":[]}},\"winner\":{\"10500\":{\"score\":0,\"boom\":[]}},\"curRound\":2}]}\", \"create_date\": \"2018-02-03 21:09:37\", \"game\": \"game_paodekuai\", \"room_id\": 582169, \"member_id\": 10506, \"game_id\": 0}]"
+}
+
+
+-- 获取游戏列表
+/query/getgamelist
+入参：无
+返回示例：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": "[{\"gameid\": 0, \"create_date\": \"2018-01-16 19:15:10\", \"language\": \"lua\", \"gamename\": \"\\u6e56\\u5357\\u5927\\u5385\", \"gamepath\": \"hall\", \"parentId\": 0}, {\"gameid\": 1, \"create_date\": \"2018-01-16 19:15:10\", \"language\": \"lua\", \"gamename\": \"\\u6e56\\u5357\\u9ebb\\u5c06\", \"gamepath\": \"game_hunanmajiang\", \"parentId\": 0}, {\"gameid\": 2, \"create_date\": \"2018-01-16 19:15:10\", \"language\": \"js\", \"gamename\": \"\\u6e56\\u5357\\u5b57\\u724c\", \"gamepath\": \"game_hunanzipai\", \"parentId\": 0}, {\"gameid\": 3, \"create_date\": \"2018-01-16 19:15:10\", \"language\": \"js\", \"gamename\": \"\\u6e56\\u5357\\u8dd1\\u5f97\\u5feb\", \"gamepath\": \"game_paodekuai\", \"parentId\": 0}, {\"gameid\": 5, \"create_date\": \"2018-01-16 19:15:10\", \"language\": \"js\", \"gamename\": \"\\u725b\\u725b\", \"gamepath\": \"game_niuniu\", \"parentId\": 0}]"
+}
+
+
+-- 获取所有游戏在线人数
+/query/getallonlines
+入参：无
+返回示例：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": 0
+}
+说明：
+如果code是0，那么dataObject的值就是在线人数
+
+
+-- 获取某个游戏在线人数
+/query/getgameonlines
+入参：{"gamepath":"game_hunanmajiang"}
+返回示例：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": 0
+}
+说明：
+如果code是0，那么dataObject的值就是在线人数
+
+
+-- 房卡充值
+/charge
+入参：{"orderid":"4567891356789013456789", "memberid":10500, "beans":3}
+充值成功返回示例（roomcards 表示充值成功之后的房卡数）：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": "{\"roomcards\": 13}"
+}
+充值失败返回示例：
+{
+  "code": 2000,
+  "Description": "失败",
+  "dataObject": null
+}
+
+
+-- 创建棋牌室/俱乐部
+/create_club/(.*)$
+说明：
+.* 表示游戏路径
+湖南麻将：game_hunanmajiang
+牛牛: game_niuniu
+区县麻将: game_quxianmajiang
+所有的游戏路径 在获取游戏列表接口 getgamelist  中都可以找到
+创建湖南麻将游戏俱乐部的请求示例:/create_club/game_hunanmajiang
+入参：{"clubname":"快来发财啊", "memberid":10502}
+说明: club_name 俱乐部名称    memberid 绑定的游戏用户id
+返回示例：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": "{\"errorCode\":0,\"errorMsg\":\"success\"}"
+}
+
+说明：
+目前只支持湖南麻将的俱乐部创建
+
+
+-- 检查游戏用户是否存在
+/query/check_user_exist
+入参：{"memberid":10500}
+返回示例：
+{
+  "code": 0,
+  "Description": "成功",
+  "dataObject": true
+}

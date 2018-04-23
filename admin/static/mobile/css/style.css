@@ -1,0 +1,197 @@
+body,td,th {
+	font-size: 14px; background-color:#f1f1f1; color:#333333; font-family:"新宋体";
+}
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+form,ul,li{ padding:0 0 0 0; margin:0 0 0 0; list-style:none; }
+td{ background-color:#ffffff; padding-left:10px; border-bottom:1px dashed #e1e1e1; height:35px; line-height:35px;}
+.a1:visited,.a1:hover,.a1:link {color: #333333;}
+.a1:active {color: #000000;}
+.a2:visited,.a2:hover,.a2:link ,.a2:active{color: #ffffff;text-decoration: none;}
+
+.aa1:visited,.aa1:hover,.aa1:link ,.aa1:active{ padding:5px 5px 5px 5px; background-color:#20A8D8;color: #ffffff; margin-left:10px; text-decoration: none;}
+
+span{ float:left;}
+.span2{ float:right; padding-right:10px;}
+.span8{ float:right; margin-right:10px;  background-color:#20A8D8; line-height:24px; padding:0px 8px 0px 8px; margin-top:10px;}
+.span1{ padding-left:10px;}
+.span3{ text-align:center; padding:2px 8px 2px 8px; background-color:#20A8D8; height:30px; line-height:10px; margin-top:8px; margin-left:10px; color:#ffffff;}
+.span4{ border:1px #999999 solid; float:left; background-color:#e1e1e1; line-height:24px; padding:0px 8px 0px 8px;}
+.span5{background-color:#20A8D8;  color:#ffffff; line-height:26px; padding:0px 5px 0px 5px; border-left:1px #999999 solid; float:left; margin-left:-2px;}
+.span15{background-color:#20A8D8;  color:#ffffff; height:23px; line-height:23px; margin-left:10px;padding-left:5px; padding-right:5px; }
+.span5:hover,.span15:hover{cursor:pointer;}
+
+
+.span7{ width:100px; padding:2px 8px 2px 8px; background-color:#20A8D8; height:20px; line-height:20px; color:#ffffff; margin:0 auto;}
+
+.input1{ float:left; margin-left:-1px; height:26px; width:150px;}
+.input2{ float:left; margin-left:-1px; height:26px; width:100px;}
+.input3{ border:1px #ffffff solid; text-align:center; width:100%;}
+.heard{ width:100%; height:45px; line-height:45px; float:left; background-color:#ffffff; border-bottom:2px solid #e1e1e1; font-weight:bold; }
+
+.main{ padding:10px 10px 10px 10px; z-index:999; padding-bottom:100px;}
+.title{ float:left; width:100%; background-color:#ffffff; line-height:40px; height:40px; margin-top:10px;border-bottom:2px solid #e1e1e1;}
+.title1{ float:left; width:100%; background-color:#ffffff; line-height:40px; height:40px; margin-top:10px;border-bottom:2px solid #e1e1e1;border-top:2px solid #e1e1e1;}
+.club{ width:100%; float:left; background-color:#ffffff; line-height:40px; height:40px; border-bottom:1px dashed #e1e1e1;}
+
+.foot{ width:100%; line-height:35px; background-color:#ffffff; padding-top:10px;  position:fixed;bottom:0; border-top:1px #e1e1e1 solid; }
+.add_club{ width:100px; height:30px; line-height:30px; background-color:#ffffff; margin-top:20px; margin-bottom:20px; color:#ffffff;  background-color:#20A8D8;text-align:center; margin:0 auto; z-index:0; }
+.club_add{ width:100%; background-color:#ffffff; padding:10px 0px 0px 0px; float:left; text-align:center; line-height:30px;}
+.club_main{ margin:0 auto; width:240px; }
+.txt{ width:100%; text-align:center; float:left; line-height:30px;}
+.submit1{ width:100%; float:left; text-align:center; padding:20px 0px 40px 0px;}
+.submit{ background-color:#20A8D8; color:#ffffff; border:1px solid #20A8D8; padding:5px 5px 5px 5px;}
+
+.player1{ float:left;width:80px; margin-top:10px; height:80px; text-align:left;}
+.player2{ float:left;width:160px; margin-top:10px;text-align:left; line-height:35px; height:35px; overflow:hidden;  }
+.player3{ float:left;width:160px;text-align:left; line-height:35px;}
+
+.padding-top20{ padding-top:20px;}
+
+.club_info{ width:300px; height:70px; margin:0 auto; text-align:left;}
+.club_1{ width:70px; float:left; height:70px;}
+.club_2{ width:200px; float:left; height:23px; padding-left:23px; line-height:23px; font-weight:bold; overflow:hidden;}
+
+
+.span6{ width:120px; background-color:#20A8D8; height:30px; line-height:30px; text-align:center; color:#ffffff; float:left; margin-right:30px; margin-top:30px;}
+
+.daikai{ float:left; background-color:#ffffff; width:100%; line-height:35px;}
+.hh1{ float:left; width:100%;}
+
+
+.span10{ width:40px; height:40px; float:left;}
+.span11{ float:left; width:60px; height:20px; line-height:20px; overflow:hidden; }
+
+.div_over{ width:150px; height:35px; line-height:35px; float:left; overflow:hidden;}
+
+
+.player_info{ width:240px; float:left; text-align:left; padding-top:10px;}
+.player_info1{ width:150px; padding-left:20px; height:35px; float:left; overflow:hidden;}
+
+.li_left_cell {
+
+	width: 33%;
+	padding-left:0px;
+	border-top:1px solid #000;
+	border-right: 1px solid #000;
+}
+
+.li_right_cell {
+	border-top:1px solid #000;
+	width: 66%;
+	margin: 0px 5px;
+}
+
+.li_left_cell_end {
+	width: 33%;
+	padding-left:0px;
+	border-top:1px solid #000;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+}
+
+.li_right_cell_end {
+	width: 66%;
+	border-top:1px solid #000;
+	border-bottom: 1px solid #000;
+}
+
+.tr_td_div p{
+	width: 100%;
+	margin: 0px 0px;
+	height: 16px;
+}
+
+.tr_td_div .cell_p1{
+	width: 100%;
+	float: left;
+	line-height: 16px;
+	height: 50px;
+	margin: 5px 5px;
+	display:block;
+}
+
+.tr_td_div .cell_p2{
+	width: 45%;
+	float: left;
+	line-height: 16px;
+	height: 50px;
+	margin: 5px 5px;
+	display:block;
+}
+
+.tr_td_div .cell_p3{
+	width: 28%;
+	float: left;
+	line-height: 16px;
+	height: 50px;
+	margin: 5px 5px;
+	display:block;
+}
+
+.table_left p{
+	margin: 0px 0px;
+}
+.table_right .table_right_body {
+	line-height: 18px;
+}
+
+.div_cell {
+	width: 50%;
+	float: left;
+	margin: 5px 0px;
+}
+
+.table_right .table_right_body .win_cell{
+	margin: 0px 0px;
+	width: 100%;
+	color: $ffffff;
+	float: left;
+	text-overflow:ellipsis;overflow:hidden;
+}
+.table_right .table_right_body .cell {
+	margin: 0px 0px;
+	width: 100%;
+	float: left;
+	text-overflow:ellipsis;overflow:hidden;
+}
+
+.table_right .table_right_body .win_cell_2 {
+	margin: 2px 0px;
+	width: 50%;
+	color: $ffffff;
+	float: left;
+}
+.table_right .table_right_body .cell_2 {
+	margin: 2px 0px;
+	width: 50%;
+	float: left;
+}
+
+.table_right .table_right_body .win_cell_3 {
+	margin: 2px 0px;
+	width: 100%;
+	color: $ffffff;
+	float: left;
+}
+.table_right .table_right_body .cell_3 {
+	margin: 2px 0px;
+	width: 50%;
+	float: left;
+}
+
+.table_right .table_right_body .win_cell_4 {
+	margin: 2px 0px;
+	width: 100%;
+	color: $ffffff;
+	float: left;
+}
+.table_right .table_right_body .cell_4 {
+	margin: 2px 0px;
+	width: 30%;
+	float: left;
+}
